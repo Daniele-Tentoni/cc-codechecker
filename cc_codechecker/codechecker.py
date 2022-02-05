@@ -9,14 +9,17 @@ any update to other users.
 import argparse
 import os
 import sys
+from importlib.metadata import version
 from textwrap import dedent
 from typing import Optional
 
 # Codechecker
-import cc_codechecker
 from cc_codechecker.challenge import Challenge
-from cc_codechecker.configuration import (Configuration, get_configuration,
-                                          set_configuration)
+from cc_codechecker.configuration import (
+  Configuration,
+  get_configuration,
+  set_configuration,
+)
 from cc_codechecker.project import Project
 
 
@@ -190,7 +193,8 @@ def main():
 
   try:
     if args.version:
-      print(f'{cc_codechecker.__version__}')
+      __version__ = version('cc-codechecker')
+      print(__version__)
       sys.exit(os.EX_OK)
 
     sys.exit(args.func(args))

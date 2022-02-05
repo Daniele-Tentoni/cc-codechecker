@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cc-codechecker"
-version = "0.1.2"
+version = "0.1.3"
 description = "Facilities to manage coding challenges."
 authors = ["Daniele Tentoni <daniele.tentoni.1996@gmail.com>"]
 keywords = ['coding', 'challenge', 'yaml', 'project', 'facilities']
@@ -34,7 +34,6 @@ branch = 'main'
 build_command = 'poetry build'
 major_on_zero = false
 version_toml = 'pyproject.toml:tool.poetry.version'
-version_variable = 'cc_codechecker/__init__.py:__version__'
 
 [tool.isort]
 color_output = true
@@ -51,7 +50,6 @@ multi_line_output = 3
 
   [tool.pylint.'FORMAT']
     indent-string = '  '
-    ignore-long-lines = '^\s*(# )?<?https?://\S+>?$|^\s*(\w*\s*=\s*)?(\"|\').*(\"|\'),?\s*$'
     max-line-length = 80
     max-module-lines = 1000
 
