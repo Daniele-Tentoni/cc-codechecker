@@ -9,6 +9,10 @@ Facilities to manage coding challenges.
    :target: https://github.com/pre-commit/pre-commit
    :alt: pre-commit
 
+.. image:: https://results.pre-commit.ci/badge/github/Daniele-Tentoni/cc-codechecker/main.svg
+   :target: https://results.pre-commit.ci/latest/github/Daniele-Tentoni/cc-codechecker/main
+   :alt: pre-commit.ci status
+
 .. image:: https://img.shields.io/badge/security-bandit-yellow.svg
     :target: https://github.com/PyCQA/bandit
     :alt: Security Status
