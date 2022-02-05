@@ -1,0 +1,8 @@
+# Projects directories
+
+bash/
+csharp/
+*.txt
+.coverage
+
+__pycache__/
