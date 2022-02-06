@@ -201,7 +201,7 @@ This is a really complex configuration that can be explained as following:
 Contributing
 ============
 
-Contributions are welcome! Check out `Contributing Guidelines`_
+Contributions are welcome! Check out `Contributing Guidelines`_.
 
 .. _Contributing Guidelines: /CONTRIBUTING.rst
 
