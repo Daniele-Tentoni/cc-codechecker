@@ -5,6 +5,18 @@ Codechecker
 Facilities to manage coding challenges.
 ---------------------------------------
 
+.. image:: https://img.shields.io/pypi/pyversions/cc-codechecker
+    :target: https://pypi.org/project/cc-codechecker/
+    :alt: PyPI - Python Version
+
+.. image:: https://img.shields.io/pypi/v/cc-codechecker
+    :target: https://pypi.org/project/cc-codechecker/
+    :alt: PyPI
+
+.. image:: https://img.shields.io/pypi/dm/cc-codechecker
+    :target: https://pypi.org/project/cc-codechecker/
+    :alt: PyPI - Downloads
+
 .. image:: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white
     :target: https://github.com/pre-commit/pre-commit
     :alt: pre-commit
@@ -19,10 +31,6 @@ Facilities to manage coding challenges.
 
 .. image:: https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336
     :target: https://pycqa.github.io/isort/
-
-.. image:: https://img.shields.io/pypi/dm/cc-codechecker
-    :target: https://pypi.org/project/cc-codechecker/
-    :alt: PyPI - Downloads
 
 **Table of Contents**:
 
