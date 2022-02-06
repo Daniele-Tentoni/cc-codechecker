@@ -156,6 +156,10 @@ class Project():
 
     Dump all project data to a dictionary for a better yaml handling.
 
+    This method doesn't has to enforce the most simple version of project yaml
+    that could be produced, since is more important keep the code simple as
+    possible instead of data.
+
     Returns:
       dict[str, Any]: dictionary dumped.
     """
@@ -169,6 +173,9 @@ class Project():
   def version(self, **kwargs) -> bool:
     """Check if required tools are installed in the current machine.
 
+    Call the given runner for given project. If no specific runner is given,
+    call the most generic one (feature not implemented yet).
+
     Returns:
       bool: True if tools are installed, false otherwise.
     """
@@ -177,11 +184,14 @@ class Project():
   def run(self, contents, **kwargs) -> tuple[int, str]:
     """Execute the project with kwargs arguments.
 
+    Call the given runner for given project. If no specific runner is given,
+    call the most generic one (feature not implemented yet).
+
     Args:
       contents (list): List of contents to give to command.
 
     Returns:
-      tuple[int, str]: points and message.
+      tuple[int, str]: exit code and message.
     """
     verbose = 'verbose' in kwargs and kwargs['verbose']
     if verbose:
