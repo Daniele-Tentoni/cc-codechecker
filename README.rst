@@ -6,12 +6,12 @@ Facilities to manage coding challenges.
 ---------------------------------------
 
 .. image:: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white
-   :target: https://github.com/pre-commit/pre-commit
-   :alt: pre-commit
+    :target: https://github.com/pre-commit/pre-commit
+    :alt: pre-commit
 
 .. image:: https://results.pre-commit.ci/badge/github/Daniele-Tentoni/cc-codechecker/main.svg
-   :target: https://results.pre-commit.ci/latest/github/Daniele-Tentoni/cc-codechecker/main
-   :alt: pre-commit.ci status
+    :target: https://results.pre-commit.ci/latest/github/Daniele-Tentoni/cc-codechecker/main
+    :alt: pre-commit.ci status
 
 .. image:: https://img.shields.io/badge/security-bandit-yellow.svg
     :target: https://github.com/PyCQA/bandit
@@ -19,6 +19,10 @@ Facilities to manage coding challenges.
 
 .. image:: https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336
     :target: https://pycqa.github.io/isort/
+
+.. image:: https://img.shields.io/pypi/dm/cc-codechecker
+    :target: https://pypi.org/project/cc-codechecker/
+    :alt: PyPI - Downloads
 
 **Table of Contents**:
 
