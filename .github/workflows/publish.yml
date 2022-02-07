@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    uses: daniele-tentoni/cc-codechecker/.github/workflows/test.yml@v0.1.5
+    uses: daniele-tentoni/cc-codechecker/.github/workflows/test.yml@main
 
   release:
     concurrency: release
