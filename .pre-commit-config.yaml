@@ -5,9 +5,12 @@ repos:
     rev: v4.1.0
     hooks:
       - id: check-added-large-files
+      - id: check-docstring-first
       - id: check-yaml
+      - id: debug-statements
       - id: detect-private-key
       - id: end-of-file-fixer
+      - id: name-tests-test
       - id: trailing-whitespace
 
 
@@ -26,7 +29,7 @@ repos:
     rev: v2.7.2
     hooks:
     - id: pyupgrade
-      args: [--py36-plus]
+      args: [--py310-plus]
 
   - repo: local
     hooks:
