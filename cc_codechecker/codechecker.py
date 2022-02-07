@@ -9,9 +9,9 @@ any update to other users.
 import argparse
 import os
 import sys
+from argparse import Namespace
 from importlib.metadata import version
 from textwrap import dedent
-from typing import Optional
 
 # Codechecker
 from cc_codechecker.challenge import Challenge
@@ -20,45 +20,49 @@ from cc_codechecker.configuration import (
   get_configuration,
   set_configuration,
 )
+from cc_codechecker.context import Context
 from cc_codechecker.project import Project
 
 
-def check(argv: Optional[argparse.Namespace] = None) -> int:
+def check(options: Namespace) -> int:
   """Check the current configuration.
 
   Try to load the current configuration to check possible errors.
 
   Args:
-    argv (Optional[Namespace], optional):
-      The argparse Namespace object. Defaults to None.
+    options (Namespace):
+      Application context from argparse.
 
   Returns:
     int: Exit code.
   """
+  context = Context(options)
   conf = get_configuration(None)
-  if argv and argv.verbose:
+  if context.options().verbose:
+    print('Retrieved configuration:')
     print(conf)
+
   return os.EX_OK
 
-def init(argv: Optional[argparse.Namespace] = None) -> int:
+def init(options: Namespace) -> int:
   """Initialize a new challenge.
 
   Initialize a new challenge by create the configuration file in the root
   directory where the toll was executed.
 
   Args:
-    argv (Optional[Namespace], optional):
-      The argparse Namespace object. Defaults to None.
+    options (Namespace):
+      Application context from argparse.
 
   Returns:
     int: Exit code.
   """
-  verbose = argv and argv.verbose
-  if verbose:
+  context = Context(options)
+  if context.options().verbose:
     print('Initializing a new challenge')
 
   hidden = os.path.isfile('.codechecker.yml')
-  overwrite = argv and argv.overwrite_yml
+  overwrite = context.options().overwrite_yml
   if not overwrite and hidden:
     print('You already have a codechecker project installed')
     return os.EX_CANTCREAT
@@ -69,7 +73,7 @@ def init(argv: Optional[argparse.Namespace] = None) -> int:
     [Project('bash')],
   )
   set_configuration(conf)
-  if verbose:
+  if context.options().verbose:
     print('Initialization completed')
 
   if not os.path.isfile('README.md'):
@@ -82,7 +86,7 @@ def init(argv: Optional[argparse.Namespace] = None) -> int:
 
   return os.EX_OK
 
-def run(argv: Optional[argparse.Namespace] = None) -> int:
+def run(options: Namespace) -> int:
   """Run the coding challenge.
 
   Run the coding challenge, executing all challenges for all projects and
@@ -90,31 +94,39 @@ def run(argv: Optional[argparse.Namespace] = None) -> int:
   semantic error code from the context.
 
   Args:
-    argv (Optional[Namespace], optional):
-      The argparse namespace. Defaults to None.
+    options (Namespace):
+      Application context from argparse.
 
   Returns:
     int: Exit code.
   """
-  verbose = argv.verbose is True if argv else False
+  context = Context(options)
   configuration = get_configuration(None)
   if configuration is None:
-    if verbose:
+    if context.options().verbose:
       print('Configuration file is empty, no work to do')
     return os.EX_CONFIG
 
   if not isinstance(configuration, Configuration):
-    if verbose:
+    if context.options().verbose:
       c = configuration.__class__
       print(f'''Configuration not well formed, found {c} instead of
             cc_codechecker.configuration.Configuration''')
 
     return os.EX_CONFIG
 
-  configuration.run(verbose = verbose)
+  configuration.run()
   return os.EX_OK
 
-def main():
+def parse_args(args) -> Namespace:
+  """Parse args.
+
+  Args:
+      args (dict): arguments to parse.
+
+  Returns:
+      Namespace: options parsed.
+  """
   parser = argparse.ArgumentParser(
     description=dedent('''\
       ╭━━━╮    ╭╮   ╭━━━┳╮       ╭╮
@@ -189,26 +201,23 @@ def main():
     action='store_true',
     help='print run steps to screen',
   )
-  args = parser.parse_args()
+  return parser.parse_args(args)
 
+def main():
+  parser = parse_args(sys.argv[1:])
   try:
-    if args.version:
+    if parser.version:
       __version__ = version('cc-codechecker')
       print(__version__)
       sys.exit(os.EX_OK)
 
-    sys.exit(args.func(args))
+    sys.exit(parser.func(parser))
   except AttributeError as aex:
-    if 'verbose' in args and args.verbose:
-      if not hasattr(args, 'func'):
+    if parser.verbose:
+      if not hasattr(parser, 'func'):
         print('''You had run an unknown command. Ask for help running
               `cc_codechecker -h`''')
       else:
-        print(f'Attribute exception {aex}')
+        print(f'Attribute exception {aex.with_traceback(None)}')
 
     sys.exit(os.EX_NOINPUT)
-  except Exception as ex: # pylint: disable=broad-except
-    if 'verbose' in args and args.verbose:
-      print(f'Unknown error {ex}')
-
-    sys.exit(os.EX_CONFIG)

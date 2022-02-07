@@ -1,4 +1,10 @@
-"""Runner for a specific project.
+"""
+======
+Runner
+======
+-----------------------
+Abstract Runner Module.
+-----------------------
 
 Runner helps you to write plugins for cc_codechecker, providing facilities to
 check requirements on current machine about installed softwares and running
@@ -10,29 +16,38 @@ necessaries methods. This makes cc_codechecker extensible as pleasure.
 If you need to declare other methods than currently defined, prepend their
 names with an _ (underscore).
 
-Submit any new plugin requests to daniele.tentoni.1996@gmail.com .
+Submit any new plugin requests to daniele.tentoni.1996@gmail.com.
+
+Unit testing
+------------
+
+When updating this class, add unit tests to ``test_base_runner.py``.
+Usually, when you add another method that raise a NotImplementedException in
+his abstract form, add a new argument to ``test_position_raise_exception``
+method parametrization.
 """
 
-class Runner():
+# Codechecker
+from cc_codechecker.configurable import Configurable
+
+
+class Runner(Configurable):
   """Abstract base class for projects execution.
 
   Extends this class to make custom runners.
   """
 
-  def __init__(self, context) -> None:
-    self._context = context
-
-  def position(self):
+  def position(self) -> str:
     """Get the executable position.
     """
     raise NotImplementedError
 
-  def version(self):
+  def version(self) -> str:
     """Get the executable version.
     """
     raise NotImplementedError
 
-  def run(self, *args, **kwargs):
+  def run(self, *args, **kwargs) -> tuple[int, str]:
     """Run the executable for the project.
     """
     raise NotImplementedError

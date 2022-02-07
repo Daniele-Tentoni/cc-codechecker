@@ -10,58 +10,11 @@ import os
 import subprocess
 from typing import Any, Optional
 
+# Codechecker
+from cc_codechecker.context import Context
+from cc_codechecker.runner import Runner
+from cc_codechecker.runners.bash import Bash
 
-def bash_position() -> str:
-  args = ['command -v bash']
-  return subprocess.check_output(
-    args,
-    encoding='locale',
-    shell=True,
-    stderr=subprocess.STDOUT,
-  )
-
-def bash_installation(**kwargs) -> bool:
-  """Check bash installation.
-
-  Run a check on current system for an installed bash. If bash is not installed,
-  Projects targetting this platform could not be executed. Using the POSIX
-  standard command *command* make us more cross-platform. Look at this page for
-  more info:
-  https://pubs.opengroup.org/onlinepubs/9sssssssssssssssss699919799/utilities/command.html.
-
-  This method can be moved to a plugin for *bash* language.
-  """
-  verbose = 'verbose' in kwargs and kwargs['verbose']
-
-  bash = bash_position()
-  if not bash:
-    print('Bash not installed. You cannot run bash based projects.')
-  elif verbose:
-    print(f'Found bash {str(bash)}')
-
-  return bool(bash)
-
-def bash_run(**kwargs) -> tuple[int, str]:
-  """Run bash project.
-
-  This method can be moved to a plugin for *bash* language.
-  """
-  verbose = 'verbose' in kwargs and kwargs['verbose']
-  bash_pos = bash_position().rstrip('\n')
-  try:
-    args = ['./bash/program.sh']
-    program = subprocess.run(
-      args,
-      capture_output=True,
-      check=False,
-      shell=True,
-      executable=bash_pos,
-    )
-    return (program.returncode, str(program.stdout, 'utf-8'))
-  except PermissionError as perm:
-    if verbose:
-      print(f'Permission Error executing bash project: {perm}')
-    return (-1, '')
 
 def dotnet_installation(**kwargs):
   """Check the dotnet installation."""
@@ -107,24 +60,19 @@ def dotnet_run(**kwargs) -> tuple[int, str]:
       print(f'Permission error: {perm}')
     return (-1, '')
 
-known_languages = {
-  'bash': {
-    'version': bash_installation,
-    'run': bash_run,
-  },
-  'csharp': {
-    'version': dotnet_installation,
-    'run': dotnet_run,
-  },
+_known_languages = {
+  'bash': Bash,
+  'csharp': 'Csharp',
 }
 
-class Project():
+class Project:
   """Define a Project."""
-  language: str
+  runner: Runner
 
   def __init__(
     self,
     language: str,
+    **kwargs
   ) -> None:
     """Creates a new Project instance.
 
@@ -141,12 +89,25 @@ class Project():
     if not language:
       raise ValueError('Expected language for each project defined.')
 
-    if not language in known_languages:
+    if not language in _known_languages:
       raise ValueError(f'Language {language} is not supported by codechecker')
 
     super().__init__()
 
     self.language = language
+    if self.language == 'bash':
+      self.runner = Bash()
+    # Introduce more runners.
+    # Introduce better runners.
+    # Introduce runners better.
+
+    self._locals = Context().options()
+    verbose = kwargs.get('verbose', None)
+    if verbose:
+      self._locals.verbose = verbose
+
+    if self._locals.verbose:
+      print(f'Adding Project {self.language}')
 
   def __repr__(self) -> str:
     return f'{self.__class__.__name__}(language={self.language})'
@@ -164,45 +125,52 @@ class Project():
       dict[str, Any]: dictionary dumped.
     """
     result: dict = {}
-    valued = [(k,v) for k, v in self.__dict__.items() if v]
+
+    items = self.__dict__.items()
+    valued = [(k,v) for k, v in items if _excluded(k, v)]
     for key, value in valued:
       result[key] = value
 
     return result
 
-  def version(self, **kwargs) -> bool:
+  def version(self) -> bool:
     """Check if required tools are installed in the current machine.
 
     Call the given runner for given project. If no specific runner is given,
     call the most generic one (feature not implemented yet).
 
+    At the moment, no minimum version is required for projects. It needs a new
+    field in yaml configuration file.
+
     Returns:
       bool: True if tools are installed, false otherwise.
     """
-    return known_languages[self.language]['version'](**kwargs) is True
+    return self.runner.version() is True
 
-  def run(self, contents, **kwargs) -> tuple[int, str]:
+  def run(self, contents) -> tuple[int, str]:
     """Execute the project with kwargs arguments.
 
     Call the given runner for given project. If no specific runner is given,
     call the most generic one (feature not implemented yet).
 
     Args:
-      contents (list): List of contents to give to command.
+      contents (list):
+        List of contents to give to command.
 
     Returns:
       tuple[int, str]: exit code and message.
     """
-    verbose = 'verbose' in kwargs and kwargs['verbose']
-    if verbose:
+    if self._locals.verbose:
       print(f'Run Project {self.language}')
 
-    if not self.version(**kwargs):
+    if not self.version():
       return (-1, 'Unknown version')
 
-    return known_languages[self.language]['run'](
-      contents = contents, **kwargs
-    )
+    return self.runner.run(contents)
+
+def _excluded(key, value):
+  excluded = ['runner']
+  return value and key not in excluded and not key.startswith('_')
 
 def get_project(kwargs) -> Optional[Project]:
   """Get a Project object from a string dictionary.

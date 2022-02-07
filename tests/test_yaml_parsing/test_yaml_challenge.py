@@ -1,5 +1,4 @@
-"""Test Yaml Configuration parsing.
-"""
+"""Test Yaml Configuration parsing."""
 # Standard Library
 from textwrap import dedent
 

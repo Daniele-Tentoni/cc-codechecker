@@ -26,7 +26,7 @@ class Context(metaclass=Singleton):
   Use this utility to store cli options and other env info.
   """
 
-  def __init__(self, options: Namespace = Namespace()):
+  def __init__(self, options: Namespace = Namespace(verbose = False)):
     """Creates a new Context object.
 
     Use this method only one time each execution.
