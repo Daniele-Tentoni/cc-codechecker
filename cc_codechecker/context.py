@@ -7,8 +7,7 @@ from typing import Any
 
 
 class Singleton(type):
-  """Pythonic implementation of singleton.
-  """
+  """Pythonic implementation of singleton."""
   _instances: dict[Any, Any] = {}
   _lock: Lock = Lock()
 
@@ -26,36 +25,37 @@ class Context(metaclass=Singleton):
   Use this utility to store cli options and other env info.
   """
 
-  def __init__(self, options: Namespace = Namespace(verbose = False)):
+  def __init__(
+    self,
+    options: Namespace = Namespace(verbose = False),
+  ):
     """Creates a new Context object.
 
-    Use this method only one time each execution.
-    This class will be updated to a singleton before first major release.
+    This method instance a new Context object the first time, any other time it
+    return the instance created the first time.
 
     Args:
       options (Namespace, optional):
-        Options from command line.
-        Defaults to Namespace().
+        Options from command line for the current execution.
+        Defaults to Namespace(verbose = False).
     """
     self._options = options
 
-  def set_option(self, name: str, value):
-    """Set the value of an options.
-
-    You can set the value of an options only if it already exists.
+  @classmethod
+  def get(cls, name, default):
+    """Gets the value of a specific option in the context.
 
     Args:
-      name (str): name of the options to change.
-      value ([type]): value of the option to set.
+        name ([type]): [description]
 
-    Raises:
-      ValueError: when trying to set an options which doesn't exists.
+    Returns:
+        [type]: [description]
     """
-    if name not in self._options:
-      raise ValueError(f'You are trying to set {name} which doesn\'t exists \
-        in options values')
+    opts = Context().options()
+    if name in opts:
+      return getattr(Context().options(), name)
 
-    self._options[name] = value
+    return default
 
   def options(self) -> Namespace:
     """Gets a deepcopy of options.
