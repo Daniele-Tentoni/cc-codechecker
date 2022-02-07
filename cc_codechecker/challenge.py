@@ -9,10 +9,11 @@ expected outputs from starting inputs.
 from typing import Any
 
 # Codechecker
+from cc_codechecker.configurable import Configurable
 from cc_codechecker.project import Project
 
 
-class Challenge():
+class Challenge(Configurable):
   """Define a step of the challenge.
 
   It can assign points to score the attempt.
@@ -56,7 +57,7 @@ class Challenge():
       value (int, optional):
         Define the value of successfully completing the step.. Defaults to 1.
     """
-    super().__init__()
+    super().__init__(**kwargs)
 
     self.name = kwargs.get('name', '')
     self.argument = kwargs.get('argument', '')
@@ -75,14 +76,14 @@ class Challenge():
         "arguments-returns [{ self.arguments, self.results }]"''')
 
     # Here the configuration is valid.
-    verbose = 'verbose' in kwargs and kwargs['verbose'] is True
-    if verbose:
-      print(f'Adding challenge {self.name}')
+    if self._locals.verbose:
+      print(f'Adding Challenge {self.name}')
 
   def __repr__(self) -> str:
     args: list[str] = []
 
-    valued = [(k,v) for k, v in self.__dict__.items() if v]
+    items = self.__dict__.items()
+    valued = [(k,v) for k, v in items if _excluded(k, v)]
     for key, value in valued:
       args.append(f'{key}={value}')
 
@@ -95,32 +96,37 @@ class Challenge():
 
     Dump all challenge data to a dictionary for a better yaml handling.
 
+    This method doesn't has to enforce the most simple version of project yaml
+    that could be produced, since is more important keep the code simple as
+    possible instead of data.
+
     Returns:
       dict[str]: dictionary dumped.
     """
     result = {}
-    valued = [(k,v) for k, v in self.__dict__.items() if v]
+    items = self.__dict__.items()
+    valued = [(k,v) for k, v in items if _excluded(k, v)]
     for key, value in valued:
       if key != 'value' or value != 0:
         result[key] = value
 
     return result
 
-  def run(self, ext_projects: list[Project], verbose: bool) -> int:
+  def run(self, ext_projects: list[Project]) -> int:
     """Execute the challenge with arguments.
 
     Args:
       ext_projects (list[Project]):
         List of external projects.
-      verbose (bool):
-        define if has to run in verbose mode.
+      context (Namespace):
+        Application context from argparse.
 
     Results:
       int:
         score gained with this challenge.
     """
 
-    if verbose:
+    if self._locals.verbose:
       message = f'Run Challenge {self.name}'
       if self.value:
         message = message + f' for {self.value} points'
@@ -133,12 +139,12 @@ class Challenge():
     contents = self.arguments if self.arguments else ''
 
     for project in ext_projects:
-      proj_outs = project.run(contents, verbose = verbose)
+      proj_outs = project.run(contents)
       if not check_proj_outs(project, proj_outs):
         continue
 
       # Continue only with results.
-      if verbose:
+      if self._locals.verbose:
         print(f'Check for {self.result} and {self.results}')
       if not self.result and not self.results:
         return self.value
@@ -159,7 +165,7 @@ class Challenge():
         # Continue with next project.
         continue
 
-      if verbose:
+      if self._locals.verbose:
         print(f'{outputs} == {results} => {outputs == results}')
 
       if str(outputs) == str(results):
@@ -167,6 +173,10 @@ class Challenge():
 
     # No points collected at this point.
     return 0
+
+def _excluded(key, value):
+  excluded = ['_locals']
+  return value and key not in excluded and not key.startswith('_')
 
 def check_proj_outs(project: Project, outs: tuple[int, str]) -> bool:
   """Check for project run outputs.

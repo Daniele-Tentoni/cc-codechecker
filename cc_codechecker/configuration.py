@@ -11,6 +11,7 @@ import yaml  # type: ignore
 
 # Codechecker
 from cc_codechecker.challenge import Challenge, get_challenge
+from cc_codechecker.context import Context
 from cc_codechecker.project import Project, get_project
 
 DEFAULT_OUTPUT = 'output.txt'
@@ -32,6 +33,7 @@ class Configuration():
     challenges: list[Challenge],
     projects: list[Project],
     output: str = DEFAULT_OUTPUT,
+    **kwargs
   ) -> None:
     if not challenges or len(challenges) < 1:
       raise ValueError('Expected at least one challenge')
@@ -43,6 +45,13 @@ class Configuration():
     self.challenges = challenges
     self.output = output
     self.projects = projects
+
+    self._locals = Context().options()
+    if verbose := kwargs.get('verbose', None):
+      self._locals.verbose = verbose
+
+    if self._locals.verbose:
+      print('Adding Configuration')
 
   def __repr__(self) -> str:
     args: list[str] = []
@@ -71,27 +80,27 @@ class Configuration():
     projects = [k.dump() for k in self.projects]
     result['challenges'] = challenges
     result['projects'] = projects
-    excluded = ['challenges', 'projects']
+
     items = self.__dict__.items()
-    valued = [(k,v) for k, v in items if v and k not in excluded]
+    valued = [(k,v) for k, v in items if _excluded(k, v)]
     for key, value in valued:
       if key != 'output' or value != 'output.txt':
         result[key] = value
 
     return result
 
-  def run(self, verbose: bool = False):
+  def run(self):
     """Run the configuration.
 
     Args:
-      verbose (bool, optional): run in verbose mode, reporting more info on
-      the stdout. Defaults to False.
+      context (Namespace):
+        Application context from argparse.
     """
     score: int = 0
     for challenge in self.challenges:
-      points = challenge.run(self.projects, verbose = verbose)
+      points = challenge.run(self.projects)
       score = score + points
-      if verbose:
+      if self._locals.verbose:
         print(f'Gained {points} points, now {score}')
 
     try:
@@ -99,6 +108,10 @@ class Configuration():
         score_writer.write(str(score))
     except OSError as ex:
       print(f'Exception in writing scores: {ex}')
+
+def _excluded(key, value):
+  excluded = ['challenges', 'projects']
+  return value and key not in excluded and not key.startswith('_')
 
 def set_configuration(configuration: Configuration):
   """Set the configuration to yaml
