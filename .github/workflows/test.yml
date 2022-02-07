@@ -44,7 +44,7 @@ jobs:
 
       - name: Run tests with coverage
         if: matrix.os == 'ubuntu-latest' && matrix.python == '3.10'
-        run: poetry run python -m pytest --cov-report term-missing:skip-covered --cov-fail-under=67 --cov=cc_codechecker tests/
+        run: poetry run python -m pytest --cov-report= --cov-fail-under=67 --cov=cc_codechecker tests/
 
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
