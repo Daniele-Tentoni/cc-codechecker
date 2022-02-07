@@ -1,6 +1,6 @@
 """Codechecker top-level functions.
 
-Functions written in this file has to be considered our public api.
+Functions written in this file has to be considered our **public api**.
 Any change to this file as to be considered a breaking change if it require
 any update to other users.
 """
