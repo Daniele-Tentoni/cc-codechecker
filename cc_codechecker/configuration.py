@@ -133,7 +133,7 @@ def set_configuration(configuration: Configuration):
 
 def get_configuration(
   dic: dict[str, Any] | None
-) -> Optional[Configuration]:
+) -> Configuration | None:
   """Get the configuration from yaml
 
   Read the codechecker.yml file in the root directory and read it to get the
