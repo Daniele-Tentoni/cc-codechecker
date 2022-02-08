@@ -28,7 +28,7 @@ def test_verbose_project():
   context = Context(Namespace(verbose = False))
   with patch('builtins.print') as printer:
     Project('bash', verbose = True)
-  printer.assert_called_once_with('Adding Project cash')
+  printer.assert_called_once_with('Adding Project bash')
   del context
 
 def test_not_verbose_project():

@@ -9,7 +9,7 @@ import subprocess
 from cc_codechecker.runner import Runner
 
 
-class Bash(Runner):
+class Bash(Runner): # pragma: no cover
   """Bash runner.
 
   Support for bash projects.
