@@ -24,7 +24,7 @@ from cc_codechecker.context import Context
 from cc_codechecker.project import Project
 
 
-def check(options: Namespace) -> int:
+def check(options: Namespace) -> int: # pragma: no cover
   """Check the current configuration.
 
   Try to load the current configuration to check possible errors.
@@ -44,7 +44,7 @@ def check(options: Namespace) -> int:
 
   return os.EX_OK
 
-def init(options: Namespace) -> int:
+def init(options: Namespace) -> int: # pragma: no cover
   """Initialize a new challenge.
 
   Initialize a new challenge by create the configuration file in the root
@@ -86,7 +86,7 @@ def init(options: Namespace) -> int:
 
   return os.EX_OK
 
-def run(options: Namespace) -> int:
+def run(options: Namespace) -> int: # pragma: no cover
   """Run the coding challenge.
 
   Run the coding challenge, executing all challenges for all projects and
@@ -118,7 +118,7 @@ def run(options: Namespace) -> int:
   configuration.run()
   return os.EX_OK
 
-def parse_args(args) -> Namespace:
+def parse_args(args) -> Namespace: # pragma: no cover
   """Parse args.
 
   Args:
@@ -203,7 +203,7 @@ def parse_args(args) -> Namespace:
   )
   return parser.parse_args(args)
 
-def main():
+def main(): # pragma: no cover
   parser = parse_args(sys.argv[1:])
   try:
     if parser.version:

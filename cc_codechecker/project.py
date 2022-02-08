@@ -16,7 +16,7 @@ from cc_codechecker.runner import Runner
 from cc_codechecker.runners.bash import Bash
 
 
-def dotnet_installation(**kwargs):
+def dotnet_installation(**kwargs): # pragma: no cover
   """Check the dotnet installation."""
   verbose = 'verbose' in kwargs and kwargs['verbose']
   args = ['dotnet --version']
@@ -37,7 +37,7 @@ def dotnet_installation(**kwargs):
 
   return True
 
-def dotnet_run(**kwargs) -> tuple[int, str]:
+def dotnet_run(**kwargs) -> tuple[int, str]: # pragma: no cover
   """Run dotnet project."""
   verbose = 'verbose' in kwargs and kwargs['verbose']
   try:
