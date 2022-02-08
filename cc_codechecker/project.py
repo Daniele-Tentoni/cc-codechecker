@@ -8,7 +8,7 @@ exercises for challenges.
 import glob
 import os
 import subprocess
-from typing import Any, Optional
+from typing import Any
 
 # Codechecker
 from cc_codechecker.context import Context
@@ -67,6 +67,7 @@ _known_languages = {
 
 class Project:
   """Define a Project."""
+  language: str
   runner: Runner
 
   def __init__(
@@ -102,9 +103,8 @@ class Project:
     # Introduce runners better.
 
     self._locals = Context().options()
-    verbose = kwargs.get('verbose', None)
-    if verbose:
-      self._locals.verbose = verbose
+    if 'verbose' in kwargs:
+      self._locals.verbose = kwargs.get('verbose', False)
 
     if self._locals.verbose:
       print(f'Adding Project {self.language}')
@@ -172,7 +172,7 @@ def _excluded(key, value):
   excluded = ['runner']
   return value and key not in excluded and not key.startswith('_')
 
-def get_project(kwargs) -> Optional[Project]:
+def get_project(kwargs) -> Project | None:
   """Get a Project object from a string dictionary.
 
   Generate a new Project object from a string dictionary, useful to retrieve

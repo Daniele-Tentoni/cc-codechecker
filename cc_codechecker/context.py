@@ -4,11 +4,12 @@ import copy
 from argparse import Namespace
 from threading import Lock
 from typing import Any
+from weakref import WeakValueDictionary
 
 
 class Singleton(type):
   """Pythonic implementation of singleton."""
-  _instances: dict[Any, Any] = {}
+  _instances: WeakValueDictionary = WeakValueDictionary()
   _lock: Lock = Lock()
 
   def __call__(cls, *args: Any, **kwargs: Any):
