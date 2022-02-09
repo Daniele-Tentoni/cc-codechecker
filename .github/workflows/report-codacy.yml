@@ -25,6 +25,10 @@ jobs:
         with:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
           coverage-reports: coverage.xml
+          
+      - name: Prepare git repository
+        run: |
+          git init
 
       - name: Publish 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.3
