@@ -24,7 +24,7 @@ jobs:
           coverage-reports: .coverage
 
       - name: Produce HTML report
-        runs: pytest --cov-report html:cov_html
+        run: pytest --cov-report html:cov_html
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.3
