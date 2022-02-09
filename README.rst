@@ -2,6 +2,10 @@
 Codechecker
 ===========
 ---------------------------------------
+
+.. image:: https://api.codacy.com/project/badge/Grade/cd570d18e58e45ea832a8031388d112d
+   :alt: Codacy Badge
+   :target: https://app.codacy.com/gh/Daniele-Tentoni/cc-codechecker?utm_source=github.com&utm_medium=referral&utm_content=Daniele-Tentoni/cc-codechecker&utm_campaign=Badge_Grade_Settings
 Facilities to manage coding challenges.
 ---------------------------------------
 
