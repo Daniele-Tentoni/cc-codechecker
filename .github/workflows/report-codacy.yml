@@ -9,13 +9,16 @@ on:
 
 jobs:
   upload:
+    name: Upload Coverage to many services
     runs-on: ubuntu-latest
     if: github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success'
     steps:
       - name: Download artifact
-        uses: actions/download-artifact@v2
+        uses: dawidd6/action-download-artifact@v2
         with:
+          workflow: test.yml
           name: code-coverage-report
+          workflow_conclusion: success
 
       - name: Run Codacy Reporter
         uses: codacy/codacy-coverage-reporter-action@v1
