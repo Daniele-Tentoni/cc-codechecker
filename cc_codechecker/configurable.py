@@ -28,6 +28,9 @@ class Configurable:
     """Dump the configurable object to a dictionary."""
     return dict(self.valued_items())
 
+  def _excluded(key: str, value) -> bool:
+    return bool(key) and bool(value) and not key.startswith('_')
+
   def valued_items(self) -> list[tuple[str, Any]]:
     """Gets valued items in the object.
 
@@ -38,8 +41,6 @@ class Configurable:
     Returns:
       list[tuple[str, Any]]: items not
     """
-    def _excluded(key: str, value) -> bool:
-      return bool(key) and bool(value) and not key.startswith('_')
 
     items = self.__dict__.items()
     return [(k,v) for k, v in items if _excluded(k, v)]
