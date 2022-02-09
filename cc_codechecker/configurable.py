@@ -43,7 +43,7 @@ class Configurable:
     """
 
     items = self.__dict__.items()
-    return [(k,v) for k, v in items if _excluded(k, v)]
+    return [(k,v) for k, v in items if self._excluded(k, v)]
 
   def __repr__(self) -> str:
     res = [f'{k}={v}' for k, v in self.valued_items()]
