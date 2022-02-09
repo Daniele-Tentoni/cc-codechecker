@@ -24,7 +24,7 @@ jobs:
         uses: codacy/codacy-coverage-reporter-action@v1
         with:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
-          coverage-reports: .coverage
+          coverage-reports: coverage.xml
 
       - name: Produce HTML report
         run: pytest --cov-report html:cov_html
