@@ -9,6 +9,7 @@ import glob
 import os
 import subprocess
 from typing import Any
+from cc_codechecker.configurable import Configurable
 
 # Codechecker
 from cc_codechecker.context import Context
@@ -65,7 +66,7 @@ _known_languages = {
   'csharp': 'Csharp',
 }
 
-class Project:
+class Project(Configurable):
   """Define a Project."""
   language: str
   runner: Runner
@@ -164,10 +165,10 @@ class Project:
       return (-1, 'Unknown version')
 
     return self.runner.run(contents)
-
-def _excluded(key, value):
-  excluded = ['runner']
-  return value and key not in excluded and not key.startswith('_')
+  
+  def _excluded(key: str, value) -> bool:
+    excluded = ['runner']
+    return super()._excluded(value) and key not in excluded
 
 def get_project(kwargs) -> Project | None:
   """Get a Project object from a string dictionary.
