@@ -124,14 +124,11 @@ class Project:
     Returns:
       dict[str, Any]: dictionary dumped.
     """
-    result: dict = {}
 
     items = self.__dict__.items()
     valued = [(k,v) for k, v in items if _excluded(k, v)]
-    for key, value in valued:
-      result[key] = value
-
-    return result
+    res = {key:value for key, value in valued}
+    return res
 
   def version(self) -> bool:
     """Check if required tools are installed in the current machine.
