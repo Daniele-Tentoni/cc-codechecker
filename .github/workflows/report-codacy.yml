@@ -1,4 +1,4 @@
-name: Send coverage report to Codacy
+name: Publish Coverage Report
 
 on:
   workflow_run:
@@ -22,3 +22,12 @@ jobs:
         with:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
           coverage-reports: .coverage
+
+      - name: Produce HTML report
+        runs: pytest --cov-report html:cov_html
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.2.3
+        with:
+          branch: gh-pages
+          folder: cov_html
