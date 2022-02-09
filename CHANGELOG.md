@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.1.7 (2022-02-09)
+### Fix
+* **project:** Refactor project code ([`1eaa859`](https://github.com/Daniele-Tentoni/cc-codechecker/commit/1eaa85977b9e0ab649379d3e33ae0024507820bc))
+
 ## v0.1.6 (2022-02-08)
 ### Fix
 * Exclude by default _ fields ([`aee199c`](https://github.com/Daniele-Tentoni/cc-codechecker/commit/aee199ccd93eba23c7c0cdd61b4c2da4694e0c1d))
