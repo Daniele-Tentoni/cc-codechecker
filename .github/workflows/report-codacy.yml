@@ -9,7 +9,7 @@ on:
 
 jobs:
   upload:
-    name: Upload Coverage to Codacy
+    name: Upload Coverage
     runs-on: ubuntu-latest
     if: github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success'
     steps:
@@ -26,24 +26,7 @@ jobs:
           project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
           coverage-reports: coverage.xml
 
-  publish:
-    name: Upload Report to Pages
-    runs-on: ubuntu-latest
-    if: github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success'
-    steps:
-      - name: Download artifact
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          workflow: test.yml
-          name: code-coverage-report
-          workflow_conclusion: success
-
-      - name: Produce HTML report
-        run: |
-          pip install pytest pytest-cov
-          python -m pytest --cov-report html:cov_html
-
-      - name: Deploy 🚀
+      - name: Publish 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.3
         with:
           branch: gh-pages
