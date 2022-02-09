@@ -31,9 +31,12 @@ requires = ["poetry-core>=1.0.0"]
 
 [tool.semantic_release]
 branch = 'main'
-build_command = 'poetry build'
+build_command = 'pip install poetry & poetry build'
 major_on_zero = false
-version_toml = 'pyproject.toml:tool.poetry.version'
+version_variable = [
+  "cc_codechecker/__init__.py:__version__",
+  "pyproject.toml:version"
+]
 
 [tool.isort]
 color_output = true
