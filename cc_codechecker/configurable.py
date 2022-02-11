@@ -28,7 +28,8 @@ class Configurable:
     """Dump the configurable object to a dictionary."""
     return dict(self.valued_items())
 
-  def _excluded(key: str, value) -> bool:
+  @classmethod
+  def _excluded(cls, key: str, value) -> bool:
     return bool(key) and bool(value) and not key.startswith('_')
 
   def valued_items(self) -> list[tuple[str, Any]]:
