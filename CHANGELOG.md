@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.1.10 (2022-02-11)
+### Fix
+* Use step env ([`48ee29a`](https://github.com/Daniele-Tentoni/cc-codechecker/commit/48ee29aba0ebc1921729b9c1dea33a12e4ec1e69))
+
 ## v0.1.9 (2022-02-11)
 ### Fix
 * **actions:** Remove -noop flag ([`5c4ab75`](https://github.com/Daniele-Tentoni/cc-codechecker/commit/5c4ab75cb6a46e8780600758a8bc328677f45bf5))
