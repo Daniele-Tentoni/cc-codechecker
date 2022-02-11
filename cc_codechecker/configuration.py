@@ -5,7 +5,7 @@ challenge.
 """
 
 # Standard Library
-from typing import Any, Optional
+from typing import Any
 
 import yaml  # type: ignore
 
@@ -59,7 +59,6 @@ class Configuration():
       c_string = ','.join(str(c) for c in self.challenges)
       args.append(f'challenges=[{c_string}]')
     if hasattr(self, 'output') and self.output != DEFAULT_OUTPUT:
-      print(f'Append output: {self.output}')
       args.append(f'output:{self.output}')
     if self.projects:
       p_string = ','.join(str(p) for p in self.projects)
