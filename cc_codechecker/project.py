@@ -9,9 +9,9 @@ import glob
 import os
 import subprocess
 from typing import Any
-from cc_codechecker.configurable import Configurable
 
 # Codechecker
+from cc_codechecker.configurable import Configurable
 from cc_codechecker.context import Context
 from cc_codechecker.runner import Runner
 from cc_codechecker.runners.bash import Bash
@@ -127,9 +127,8 @@ class Project(Configurable):
     """
 
     items = self.__dict__.items()
-    valued = [(k,v) for k, v in items if _excluded(k, v)]
-    res = {key:value for key, value in valued}
-    return res
+    valued = {k:v for k, v in items if self._excluded(k, v)}
+    return valued
 
   def version(self) -> bool:
     """Check if required tools are installed in the current machine.
@@ -165,10 +164,11 @@ class Project(Configurable):
       return (-1, 'Unknown version')
 
     return self.runner.run(contents)
-  
-  def _excluded(key: str, value) -> bool:
+
+  @classmethod
+  def _excluded(cls, key: str, value) -> bool:
     excluded = ['runner']
-    return super()._excluded(value) and key not in excluded
+    return super()._excluded(key, value) and key not in excluded
 
 def get_project(kwargs) -> Project | None:
   """Get a Project object from a string dictionary.
