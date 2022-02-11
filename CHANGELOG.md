@@ -2,6 +2,12 @@
 
 <!--next-version-placeholder-->
 
+## v0.1.9 (2022-02-11)
+### Fix
+* **actions:** Remove -noop flag ([`5c4ab75`](https://github.com/Daniele-Tentoni/cc-codechecker/commit/5c4ab75cb6a46e8780600758a8bc328677f45bf5))
+* **bash:** Use new run verbose value ([`312dbcc`](https://github.com/Daniele-Tentoni/cc-codechecker/commit/312dbccddcfc604504272ac0ce96007f3c4c7c91))
+* Remove useless import ([`cc1f69f`](https://github.com/Daniele-Tentoni/cc-codechecker/commit/cc1f69f984f7b857a2d89df994e9ab29add05df5))
+
 ## v0.1.8 (2022-02-11)
 ### Fix
 * **configurable:** Fix the _excluded method reference ([`1cac78d`](https://github.com/Daniele-Tentoni/cc-codechecker/commit/1cac78db30b0d3bee788ca981addfe81fbe41b00))
