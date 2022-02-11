@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v0.1.8 (2022-02-11)
+### Fix
+* **configurable:** Fix the _excluded method reference ([`1cac78d`](https://github.com/Daniele-Tentoni/cc-codechecker/commit/1cac78db30b0d3bee788ca981addfe81fbe41b00))
+* **project:** Inherit excluded function ([`e1dd669`](https://github.com/Daniele-Tentoni/cc-codechecker/commit/e1dd6697d7fc3462d05ed64bf9d3bca0563073d1))
+
 ## v0.1.7 (2022-02-09)
 ### Fix
 * **project:** Refactor project code ([`1eaa859`](https://github.com/Daniele-Tentoni/cc-codechecker/commit/1eaa85977b9e0ab649379d3e33ae0024507820bc))

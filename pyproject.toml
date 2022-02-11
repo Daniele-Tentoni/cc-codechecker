@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cc-codechecker"
-version = "0.1.7"
+version = "0.1.8"
 description = "Facilities to manage coding challenges."
 authors = ["Daniele Tentoni <daniele.tentoni.1996@gmail.com>"]
 keywords = ['coding', 'challenge', 'yaml', 'project', 'facilities']
