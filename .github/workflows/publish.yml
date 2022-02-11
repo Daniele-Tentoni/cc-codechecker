@@ -55,4 +55,4 @@ jobs:
 
       - name: Publish
         run: |
-          poetry run python -m semantic_release publish --noop -v DEBUG -D commit_author="github-actions <action@github.com>"
+          poetry run python -m semantic_release publish -v DEBUG -D commit_author="github-actions <action@github.com>"
