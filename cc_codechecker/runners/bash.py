@@ -79,7 +79,10 @@ class Bash(Runner): # pragma: no cover
       shell=True, # Is this shell injection prune?
     )
 
-    if self._locals.verbose:
+    run_verbose = kwargs['verbose'] \
+      if 'verbose' in kwargs \
+      else self._locals.verbose
+    if run_verbose:
       print(f'Bash run {bash_run}')
 
     return (bash_run.returncode, bash_run.stdout)
