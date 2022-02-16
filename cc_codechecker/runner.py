@@ -1,10 +1,5 @@
 """
-======
-Runner
-======
------------------------
 Abstract Runner Module.
------------------------
 
 Runner helps you to write plugins for cc_codechecker, providing facilities to
 check requirements on current machine about installed softwares and running
@@ -39,15 +34,29 @@ class Runner(Configurable):
 
   def position(self) -> str:
     """Get the executable position.
+
+    :return: path to the bash executable.
+    :rtype: str.
+    :raises NotImplementedError: if method is not inherited.
     """
     raise NotImplementedError
 
   def version(self) -> str:
     """Get the executable version.
+
+    :return: path to the bash executable.
+    :rtype: str.
+    :raises NotImplementedError: if method is not inherited.
     """
     raise NotImplementedError
 
   def run(self, *args, **kwargs) -> tuple[int, str]:
     """Run the executable for the project.
+
+    :param args: arguments are passed to runtime execution.
+    :param kwargs: extra arguments are passed to runtime execution.
+    :return: exit code and message from runtime execution.
+    :rtype: tuple[int, str].
+    :raises NotImplementError: if method is not inherited.
     """
     raise NotImplementedError

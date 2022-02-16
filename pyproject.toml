@@ -47,8 +47,6 @@ include_trailing_comma = true
 indent = 2
 multi_line_output = 3
 
-[tool.pydocstyle]
-
 [tool.pylint]
   [tool.pylint.'BASIC']
     docstring-min-length = 10
