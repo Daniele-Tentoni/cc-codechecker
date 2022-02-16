@@ -9,17 +9,17 @@ import subprocess
 from cc_codechecker.runner import Runner
 
 
-class Bash(Runner): # pragma: no cover
+class Bash(Runner):
   """Bash runner.
 
   Support for bash projects.
   """
 
   def position(self) -> str:
-    """Get the bash position.
+    """Get the bash executable position.
 
-    Returns:
-      str: path to the bash executable.
+    :return: path to the bash executable.
+    :rtype: str
     """
     args = ['command -v bash']
     bash_pos = subprocess.check_output(
@@ -34,16 +34,16 @@ class Bash(Runner): # pragma: no cover
     return bash_pos
 
   def version(self) -> str:
-    """Get current bash installation.
+    """Get the bash executable version.
 
     Run a check on current system for an installed bash. If bash is not
     installed, Projects targetting this platform could not be executed.
     Using the POSIX standard command *command* make us more cross-platform.
     Look at this page for more info:
-    https://pubs.opengroup.org/onlinepubs/9sssssssssssssssss699919799/utilities/command.html.
+    https://pubs.opengroup.org/onlinepubs/9699919799/utilities/command.html.
 
-    Returns:
-      str: installed version
+    :return: version of the bash executable.
+    :rtype: str.
     """
     bash_path = self._check_position()
     args = ['echo $BASH_VERSION']
@@ -56,16 +56,19 @@ class Bash(Runner): # pragma: no cover
     )
     if self._locals.verbose:
       print(f'Bash version {bash_ver}')
+
     return bash_ver.rstrip('\n')
 
   def run(self, *args, **kwargs) -> tuple[int, str]:
-    """Run the bash project.
+    """Run the bash executable for the project.
 
     Run the project in the bash folder. I don't know if it is shell injection
     prune.
 
-    Returns:
-      tuple[int, str]: return code and message.
+    :param args: arguments are passed to bash execution.
+    :param kwargs: extra arguments are passed to bash execution.
+    :return: exit code and message from bash project execution.
+    :rtype: tuple[int, str].
     """
     bash_path = self._check_position()
 
@@ -92,11 +95,9 @@ class Bash(Runner): # pragma: no cover
 
     Raise a Value Error if executable is not found.
 
-    Raises:
-      ValueError: Bash executable not installed.
-
-    Returns:
-      str: bash executable path.
+    :return: bash executable path.
+    :rtype: str.
+    :raises ValueError: if bash is not installed.
     """
     bash_path = self.position().rstrip('\n')
     if not bash_path:
