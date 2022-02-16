@@ -1,4 +1,4 @@
-"""Test Base Runner Exception throws"""
+"""Test Base Runner Exception throws."""
 
 import pytest
 
@@ -8,6 +8,7 @@ from cc_codechecker.runner import Runner
 
 @pytest.fixture(name='project_runner')
 def fixture_project_runner() -> Runner:
+  """Provide common Project instance."""
   return Runner()
 
 @pytest.mark.parametrize(
@@ -17,10 +18,11 @@ def fixture_project_runner() -> Runner:
    'run',
   ],
 )
-def test_position_raise_exception(
+def test_methods_raise_exception(
   project_runner: Runner,
   method: str,
 ):
+  """Test Error raise for each abstract method."""
   with pytest.raises(NotImplementedError) as err:
     getattr(project_runner, method)()
   assert err.errisinstance(NotImplementedError)
