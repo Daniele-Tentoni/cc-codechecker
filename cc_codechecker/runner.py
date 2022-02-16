@@ -35,7 +35,7 @@ class Runner(Configurable):
   def position(self) -> str:
     """Get the executable position.
 
-    :return: path to the bash executable.
+    :return: path to the runner executable.
     :rtype: str.
     :raises NotImplementedError: if method is not inherited.
     """
@@ -44,7 +44,7 @@ class Runner(Configurable):
   def version(self) -> str:
     """Get the executable version.
 
-    :return: path to the bash executable.
+    :return: version of the runner executable.
     :rtype: str.
     :raises NotImplementedError: if method is not inherited.
     """
