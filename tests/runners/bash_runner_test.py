@@ -15,15 +15,15 @@ def fixture_bash_runner() -> Bash:
   return Bash()
 
 @patch('cc_codechecker.runners.bash.subprocess.check_output')
-def test_position_bash(check: MagicMock, bash: Bash):
+def test_position_bash(check: MagicMock, bash_runner: Bash):
   """Test returning position value."""
   check.return_value = '/usr/bin/bash'
-  pos = bash.position()
+  pos = bash_runner.position()
   assert pos
 
 @patch('cc_codechecker.runners.bash.subprocess.check_output')
-def test_position_value_error(check: MagicMock, bash: Bash):
+def test_position_value_error(check: MagicMock, bash_runner: Bash):
   """Test a missing bash runner."""
   check.return_value = ''
-  pos = bash.position()
+  pos = bash_runner.position()
   assert not pos
