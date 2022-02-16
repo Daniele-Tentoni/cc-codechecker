@@ -15,6 +15,7 @@ cc-codechecker = 'cc_codechecker.codechecker:main'
 python = "^3.10.0"
 PyYAML = "^6.0"
 python-semantic-release = "^7.24.0"
+pydocstyle = "^6.1.1"
 
 [tool.poetry.dev-dependencies]
 bandit = "^1.7.1"
@@ -45,6 +46,8 @@ import_heading_stdlib = 'Standard Library'
 include_trailing_comma = true
 indent = 2
 multi_line_output = 3
+
+[tool.pydocstyle]
 
 [tool.pylint]
   [tool.pylint.'BASIC']
