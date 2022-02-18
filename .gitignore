@@ -3,6 +3,8 @@
 bash/
 csharp/
 *.txt
+!LICENSES/*.txt
 .coverage
 
 __pycache__/
+*_cache/

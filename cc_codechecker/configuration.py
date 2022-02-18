@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2022 Daniele Tentoni <daniele.tentoni.1996@gmail.com
+#
+# SPDX-License-Identifier: MIT
+
 """Configuration module.
 
 A configuration represent the complete definition of the current coding

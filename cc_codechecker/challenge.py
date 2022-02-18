@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2022 Daniele Tentoni <daniele.tentoni.1996@gmail.com
+#
+# SPDX-License-Identifier: MIT
+
 """Challenge module.
 
 A Challenge represent an use case for projects used to gain score points if
