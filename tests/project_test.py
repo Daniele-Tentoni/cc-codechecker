@@ -53,15 +53,12 @@ def test_version(version: MagicMock, project: Project):
   ver = project.version()
   assert not ver
 
+@patch('cc_codechecker.runners.bash.Bash.run')
 @patch('cc_codechecker.project.Project.version')
-@patch('cc_codechecker.runner.Runner.run')
 def test_run(version: MagicMock, runner: MagicMock, project: Project):
   """Test project successful run."""
   version.return_value = True
-  runner.return_value = MagicMock(
-    returncode=0,
-    stdout='',
-  )
+  runner.return_value = (0,'')
   run = project.run(None)
   assert run[0] == 0
   assert run[1] == ''
