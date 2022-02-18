@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2022 Daniele Tentoni <daniele.tentoni.1996@gmail.com
+#
+# SPDX-License-Identifier: MIT
+
 """Projects module.
 
 A Project represent a program that the user has to produce to complete

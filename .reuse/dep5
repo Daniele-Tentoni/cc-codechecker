@@ -1,0 +1,23 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: Code Checker
+Upstream-Contact: Daniele Tentoni <daniele.tentoni.1996@gmail.com>
+Source: https://github.com/Daniele-Tentoni/cc-codechecker
+
+Files:
+ *.md
+ *.rst
+ **/*.md
+ **/*.rst
+ pyproject.toml
+Copyright: 2022 Daniele Tentoni <daniele.tentoni.1996@gmail.com>
+License: MIT
+
+Files:
+ .gitignore
+ .pre-commit-config.yaml
+ .github/FUNDING.yml
+ .github/renovate.json
+ .vscode/settings.json
+ poetry.lock
+Copyright: 2022 Daniele Tentoni <daniele.tentoni.1996@gmail.com>
+License: CC0-1.0

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2022 Daniele Tentoni <daniele.tentoni.1996@gmail.com
+#
+# SPDX-License-Identifier: MIT
+
 """Codechecker top-level functions.
 
 Functions written in this file has to be considered our **public api**.

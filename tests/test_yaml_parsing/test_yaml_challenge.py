@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2022 Daniele Tentoni <daniele.tentoni.1996@gmail.com
+#
+# SPDX-License-Identifier: MIT
+
 """Test Yaml Configuration parsing."""
 # Standard Library
 from textwrap import dedent
