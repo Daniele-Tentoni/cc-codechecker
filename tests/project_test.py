@@ -48,3 +48,19 @@ def test_version(version: MagicMock, project: Project):
   version.return_value = '1.0.0'
   ver = project.version()
   assert not ver
+
+@patch('cc_codechecker.project.Project.version')
+def test_run(version: MagicMock, project: Project):
+  """Test project run."""
+  version.return_value = True
+  run = project.run(None)
+  assert run[0] == 0
+  assert run[1] == ''
+
+@patch('cc_codechecker.project.Project.version')
+def test_run_version_check_fail(version: MagicMock, project: Project):
+  """Test project run."""
+  version.return_value = False
+  run = project.run(None)
+  assert run[0] == -1
+  assert run[1] == 'Unknown version'
