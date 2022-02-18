@@ -36,6 +36,10 @@ Facilities to manage coding challenges.
    :alt: Codacy Badge
    :target: https://app.codacy.com/gh/Daniele-Tentoni/cc-codechecker?utm_source=github.com&utm_medium=referral&utm_content=Daniele-Tentoni/cc-codechecker&utm_campaign=Badge_Grade_Settings
 
+.. image:: https://api.reuse.software/badge/github.com/Daniele-Tentoni/cc-codechecker
+   :alt: REUSE status
+   :target: https://api.reuse.software/info/github.com/Daniele-Tentoni/cc-codechecker
+
 **Table of Contents**:
 
 A. `Purpose`__
