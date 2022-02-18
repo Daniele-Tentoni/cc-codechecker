@@ -15,13 +15,14 @@ cc-codechecker = 'cc_codechecker.codechecker:main'
 python = "^3.10.0"
 PyYAML = "^6.0"
 python-semantic-release = "^7.24.0"
-pydocstyle = "^6.1.1"
 
 [tool.poetry.dev-dependencies]
 bandit = "^1.7.1"
+coverage = {extras = ["toml"], version = "^6.3.1"}
 isort = "^5.10.1"
 mypy = "^0.931"
 pre-commit = "^2.16.0"
+pydocstyle = "^6.1.1"
 pylint = "^2.12.2"
 pytest = "^7.0.0"
 pytest-cov = "^3.0.0"
@@ -29,6 +30,11 @@ pytest-cov = "^3.0.0"
 [build-system]
 build-backend = "poetry.core.masonry.api"
 requires = ["poetry-core>=1.0.0"]
+
+[tool.coverage.run]
+omit = [
+  "cc_codechecker/__main__.py",
+]
 
 [tool.semantic_release]
 branch = 'main'
