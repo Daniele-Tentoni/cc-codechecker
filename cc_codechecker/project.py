@@ -72,6 +72,7 @@ _known_languages = {
 
 class Project(Configurable):
   """Define a Project."""
+
   language: str
   runner: Runner
 
@@ -80,7 +81,7 @@ class Project(Configurable):
     language: str,
     **kwargs
   ) -> None:
-    """Creates a new Project instance.
+    """Create a new Project instance.
 
     Creates a new Project instance checking that language given is in known
     languages array.
@@ -115,6 +116,7 @@ class Project(Configurable):
       print(f'Adding Project {self.language}')
 
   def __repr__(self) -> str:
+    """Represent the project with a string."""
     return f'{self.__class__.__name__}(language={self.language})'
 
   def dump(self) -> dict[str, Any]:
@@ -129,7 +131,6 @@ class Project(Configurable):
     Returns:
       dict[str, Any]: dictionary dumped.
     """
-
     items = self.__dict__.items()
     valued = {k:v for k, v in items if self._excluded(k, v)}
     return valued
@@ -146,7 +147,7 @@ class Project(Configurable):
     Returns:
       bool: True if tools are installed, false otherwise.
     """
-    return self.runner.version() is True
+    return bool(self.runner.version())
 
   def run(self, contents) -> tuple[int, str]:
     """Execute the project with kwargs arguments.
