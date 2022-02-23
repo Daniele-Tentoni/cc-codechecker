@@ -28,6 +28,7 @@ class Configuration():
     ValueError: thrown if no challenges are given
     ValueError: thrown if no projects are given
   """
+
   challenges: list[Challenge]
   output: str = DEFAULT_OUTPUT
   projects: list[Project]
@@ -39,6 +40,7 @@ class Configuration():
     output: str = DEFAULT_OUTPUT,
     **kwargs
   ) -> None:
+    """Create a new Configuration object."""
     if not challenges or len(challenges) < 1:
       raise ValueError('Expected at least one challenge')
     if not projects or len(projects) < 1:
@@ -58,6 +60,7 @@ class Configuration():
       print('Adding Configuration')
 
   def __repr__(self) -> str:
+    """Represent the configuration object with a string."""
     args: list[str] = []
     if hasattr(self, 'challenges') and self.challenges:
       c_string = ','.join(str(c) for c in self.challenges)
@@ -117,7 +120,7 @@ def _excluded(key, value):
   return value and key not in excluded and not key.startswith('_')
 
 def set_configuration(configuration: Configuration):
-  """Set the configuration to yaml
+  """Set the configuration to yaml.
 
   Write the .codechecker.yml file in the root directory to save the current
   configuration.
@@ -137,7 +140,7 @@ def set_configuration(configuration: Configuration):
 def get_configuration(
   dic: dict[str, Any] | None
 ) -> Configuration | None:
-  """Get the configuration from yaml
+  """Get the configuration from yaml.
 
   Read the codechecker.yml file in the root directory and read it to get the
   actual configuration provided. If something given in dic, convert it.
@@ -156,16 +159,6 @@ def get_configuration(
   raw_configuration: dict[str, Any] = {}
   if dic is not None:
     raw_configuration = dic
-  else:
-    try:
-      with open(FILE_NAME, encoding='locale') as file:
-        raw_configuration = yaml.full_load(file)
-    except OSError as os_error:
-      print(f'Problem opening the configuration file: {os_error}')
-      raise ValueError('Fail to retrieve configuration file') from os_error
-    except Exception as ex:
-      print(f'Unknown exception while reading configuration {dic} due to {ex}')
-      raise Exception from ex
 
   if 'projects' not in raw_configuration:
     raise ValueError('Necessary at least one project')
@@ -189,7 +182,7 @@ def get_configuration(
     return None
 
 def load_projects(raw_projects: Any | dict) -> list[Project]:
-  """Loads projects from raw dictionary.
+  """Load projects from raw dictionary.
 
   Args:
     raw_projects (Any | dict): raw projects collection.
@@ -215,7 +208,7 @@ def load_projects(raw_projects: Any | dict) -> list[Project]:
   return projects
 
 def load_challenges(raw_challenges: Any | dict) -> list[Challenge]:
-  """Loads challenges from raw challenge dictionary.
+  """Load challenges from raw challenge dictionary.
 
   Args:
     raw_challenges (Any | dict): raw challenge collection.
