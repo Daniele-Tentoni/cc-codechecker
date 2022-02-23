@@ -2,6 +2,11 @@
 
 <!--next-version-placeholder-->
 
+## v0.1.11 (2022-02-23)
+### Fix
+* Move yaml read outside get_configuration function ([`54b8f1d`](https://github.com/Daniele-Tentoni/cc-codechecker/commit/54b8f1de0e679ec1d2d5a37babbdad7366dff966))
+* Project version now return the real truthy version ([`8000464`](https://github.com/Daniele-Tentoni/cc-codechecker/commit/800046439311ca84d2e04f7fe417edb909db4675))
+
 ## v0.1.10 (2022-02-11)
 ### Fix
 * Use step env ([`48ee29a`](https://github.com/Daniele-Tentoni/cc-codechecker/commit/48ee29aba0ebc1921729b9c1dea33a12e4ec1e69))
