@@ -51,7 +51,7 @@ def test_version(version: MagicMock, project: Project):
   """Test right version provided from runner."""
   version.return_value = '1.0.0'
   ver = project.version()
-  assert not ver
+  assert ver
 
 @patch('cc_codechecker.runners.bash.Bash.run')
 @patch('cc_codechecker.project.Project.version')
