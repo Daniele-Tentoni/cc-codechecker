@@ -3,6 +3,8 @@
 bash/
 csharp/
 *.txt
+.codechecker.yml
+
 !LICENSES/*.txt
 .coverage
 
