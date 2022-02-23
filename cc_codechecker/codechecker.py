@@ -17,9 +17,12 @@ from argparse import Namespace
 from importlib.metadata import version
 from textwrap import dedent
 
+import yaml
+
 # Codechecker
 from cc_codechecker.challenge import Challenge
 from cc_codechecker.configuration import (
+  FILE_NAME,
   Configuration,
   get_configuration,
   set_configuration,
@@ -41,10 +44,10 @@ def check(options: Namespace) -> int: # pragma: no cover
     int: Exit code.
   """
   context = Context(options)
-  conf = get_configuration(None)
+  raw_configuration = _read_conf_from_file()
+  configuration = get_configuration(raw_configuration)
   if context.options().verbose:
-    print('Retrieved configuration:')
-    print(conf)
+    print(f'Retrieved configuration: {configuration}')
 
   return os.EX_OK
 
@@ -90,6 +93,17 @@ def init(options: Namespace) -> int: # pragma: no cover
 
   return os.EX_OK
 
+def _read_conf_from_file() -> dict:
+  try:
+    with open(FILE_NAME, encoding='locale') as file:
+      return yaml.full_load(file)
+  except OSError as os_error:
+    print(f'Problem opening the configuration file: {os_error}')
+    raise ValueError('Fail to retrieve configuration file') from os_error
+  except Exception as ex:
+    print(f'Unknown exception while reading configuration due to {ex}')
+    raise Exception from ex
+
 def run(options: Namespace) -> int: # pragma: no cover
   """Run the coding challenge.
 
@@ -105,7 +119,8 @@ def run(options: Namespace) -> int: # pragma: no cover
     int: Exit code.
   """
   context = Context(options)
-  configuration = get_configuration(None)
+  raw_configuration = _read_conf_from_file()
+  configuration = get_configuration(raw_configuration)
   if configuration is None:
     if context.options().verbose:
       print('Configuration file is empty, no work to do')
@@ -208,6 +223,7 @@ def parse_args(args) -> Namespace: # pragma: no cover
   return parser.parse_args(args)
 
 def main(): # pragma: no cover
+  """Execute the program."""
   parser = parse_args(sys.argv[1:])
   try:
     if parser.version:
