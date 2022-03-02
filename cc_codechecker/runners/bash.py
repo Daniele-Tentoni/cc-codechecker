@@ -12,6 +12,8 @@ import subprocess
 # Codechecker
 from cc_codechecker.runner import Runner
 
+NOT_EXECUTABLE_ERROR = 126
+
 
 class Bash(Runner):
   """Bash runner.
@@ -76,7 +78,8 @@ class Bash(Runner):
     """
     bash_path = self._check_position()
 
-    cmd: list[str] = ['./bash/program.sh']
+    program_file_name = './bash/program.sh'
+    cmd: list[str] = []
     bash_run = subprocess.run(
       cmd,
       capture_output=True,
@@ -91,6 +94,9 @@ class Bash(Runner):
       else self._locals.verbose
     if run_verbose:
       print(f'Bash run {bash_run}')
+
+    if bash_run.returncode is NOT_EXECUTABLE_ERROR and not bash_run.stdout:
+      bash_run.stdout = f'{program_file_name} is not executable'
 
     return (bash_run.returncode, bash_run.stdout)
 

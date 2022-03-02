@@ -12,7 +12,7 @@ import pytest
 
 # Codechecker
 from cc_codechecker.context import Context
-from cc_codechecker.runners.bash import Bash
+from cc_codechecker.runners.bash import NOT_EXECUTABLE_ERROR, Bash
 
 
 @pytest.fixture(name='bash_runner')
@@ -54,3 +54,17 @@ def test_run(run: MagicMock, check: MagicMock, bash_runner: Bash):
   ver = bash_runner.run()
   assert ver[0] == 0
   assert ver[1] == ''
+
+@patch('cc_codechecker.runners.bash.Bash._check_position')
+@patch('cc_codechecker.runners.bash.subprocess.run')
+def test_not_executable_program(
+  run: MagicMock,
+  check: MagicMock,
+  bash_runner: Bash,
+):
+  """Test the return value of run method."""
+  run.return_value = MagicMock(stdout='', returncode=NOT_EXECUTABLE_ERROR)
+  check.return_value = '/usr/bin/bash'
+  ver = bash_runner.run()
+  assert ver[0] == 126
+  assert ver[1] == './bash/program.sh is not executable'
