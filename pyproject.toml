@@ -27,6 +27,7 @@ pylint = "^2.12.2"
 pytest = "^7.0.0"
 pytest-cov = "^3.0.0"
 reuse = "^0.14.0"
+types-PyYAML = "^6.0.4"
 
 [build-system]
 build-backend = "poetry.core.masonry.api"
