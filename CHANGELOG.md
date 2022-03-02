@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.1.12 (2022-03-02)
+### Fix
+* Report not executable bash program error ([`d3e7350`](https://github.com/Daniele-Tentoni/cc-codechecker/commit/d3e7350ae95f92ba51d59a7cf2c5ed20b80480c6))
+
 ## v0.1.11 (2022-02-23)
 ### Fix
 * Move yaml read outside get_configuration function ([`54b8f1d`](https://github.com/Daniele-Tentoni/cc-codechecker/commit/54b8f1de0e679ec1d2d5a37babbdad7366dff966))
