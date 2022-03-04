@@ -111,7 +111,7 @@ class Configuration():
 
     try:
       with open('score.txt', 'w', encoding='locale') as score_writer:
-        score_writer.write(str(score))
+        score_writer.write(f'{str(score)}\n')
     except OSError as ex:
       print(f'Exception in writing scores: {ex}')
 
