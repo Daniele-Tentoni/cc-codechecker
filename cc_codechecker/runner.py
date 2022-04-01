@@ -3,7 +3,8 @@
 # SPDX-License-Identifier: MIT
 
 """
-Abstract Runner Module.
+Abstract Runner Module
+----------------------
 
 Runner helps you to write plugins for cc_codechecker, providing facilities to
 check requirements on current machine about installed softwares and running
