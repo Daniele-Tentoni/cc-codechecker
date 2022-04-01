@@ -13,10 +13,15 @@ from weakref import WeakValueDictionary
 
 class Singleton(type):
   """Pythonic implementation of singleton."""
+
   _instances: WeakValueDictionary = WeakValueDictionary()
   _lock: Lock = Lock()
 
   def __call__(cls, *args: Any, **kwargs: Any):
+    """Call the single instance of a class.
+
+    :return: class instance
+    """
     with cls._lock:
       if cls not in cls._instances:
         instance = super().__call__(*args, **kwargs)
@@ -34,27 +39,26 @@ class Context(metaclass=Singleton):
     self,
     options: Namespace = Namespace(verbose = False),
   ):
-    """Creates a new Context object.
+    """Create a new Context object.
 
     This method instance a new Context object the first time, any other time it
     return the instance created the first time.
 
-    Args:
-      options (Namespace, optional):
-        Options from command line for the current execution.
-        Defaults to Namespace(verbose = False).
+    :param options: Options from command line for the current execution.
+        Defaults to Namespace(verbose = False)
+    :type options: Namespace, optional
     """
     self._options = options
 
   @classmethod
-  def get(cls, name, default):
-    """Gets the value of a specific option in the context.
+  def get(cls, name: str, default):
+    """Get the value of a specific option in the context.
 
-    Args:
-        name ([type]): [description]
+    :param name: [description]
+    :type name: str
+    :return: Value of the options or the default value
 
-    Returns:
-        [type]: [description]
+    .. todo:: make this class more generic
     """
     opts = Context().options()
     if name in opts:
@@ -63,7 +67,7 @@ class Context(metaclass=Singleton):
     return default
 
   def options(self) -> Namespace:
-    """Gets a deepcopy of options.
+    """Get a deepcopy of options.
 
     To update an options, use the set_option method. It will be implemented
     before next major release.
