@@ -8,6 +8,7 @@ Files:
  *.rst
  **/*.md
  **/*.rst
+ examples/*
  pyproject.toml
 Copyright: 2022 Daniele Tentoni <daniele.tentoni.1996@gmail.com>
 License: MIT
