@@ -24,9 +24,8 @@ FILE_NAME = '.codechecker.yml'
 class Configuration():
   """Define a complete configuration for code checker.
 
-  Raises:
-    ValueError: thrown if no challenges are given
-    ValueError: thrown if no projects are given
+  :raises [ValueError]: thrown if no challenges are given
+  :raises [ValueError]: thrown if no projects are given
   """
 
   challenges: list[Challenge]
@@ -98,9 +97,8 @@ class Configuration():
   def run(self):
     """Run the configuration.
 
-    Args:
-      context (Namespace):
-        Application context from argparse.
+    :param context: Application context from argparse
+    :type context: Namespace
     """
     score: int = 0
     for challenge in self.challenges:
@@ -125,9 +123,8 @@ def set_configuration(configuration: Configuration):
   Write the .codechecker.yml file in the root directory to save the current
   configuration.
 
-  Args:
-    configuration (Configuration):
-      Configuration object to save.
+  :param configuration: Configuration object to save
+  :type configuration: Configuration
   """
   try:
     with open(FILE_NAME, 'w', encoding='locale') as file:
@@ -145,20 +142,15 @@ def get_configuration(
   Read the codechecker.yml file in the root directory and read it to get the
   actual configuration provided. If something given in dic, convert it.
 
-  Args:
-    dic (dict[str, Any], optional):
-      Dictionary of a yaml object. If left None, configuration will be read
-      from ``.codechecker.yml`` file inside root dir.
+  :param dic: Dictionary of a yaml object. If left None, configuration will be
+      read from ``.codechecker.yml`` file inside root dir.
       Defaults to None.
-
-  Returns:
-    Optional[Configuration]:
-      The Configuration object produced. None if dictionary or file input is
-      invalid.
+  :type dic: dict[str, Any], optional
+  :return: The Configuration object produced. None if dictionary or file input
+      is invalid.
+  :rtype: Optional[Configuration]
   """
-  raw_configuration: dict[str, Any] = {}
-  if dic is not None:
-    raw_configuration = dic
+  raw_configuration: dict[str, Any] = dic if dic is not None else {}
 
   if 'projects' not in raw_configuration:
     raise ValueError('Necessary at least one project')
@@ -184,11 +176,11 @@ def get_configuration(
 def load_projects(raw_projects: Any | dict) -> list[Project]:
   """Load projects from raw dictionary.
 
-  Args:
-    raw_projects (Any | dict): raw projects collection.
+  :param raw_projects: raw projects collection
+  :type raw_projects: Any | dict
 
-  Returns:
-    list[Project]: Projects list.
+  :return: Projects list
+  :rtype: list[Project]
   """
   projects: list[Project] = []
   if isinstance(raw_projects, str):
