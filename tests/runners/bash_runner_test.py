@@ -12,7 +12,11 @@ import pytest
 
 # Codechecker
 from cc_codechecker.context import Context
-from cc_codechecker.runners.bash import NOT_EXECUTABLE_ERROR, Bash
+from cc_codechecker.runners.bash import (
+  MISSING_FILE_ERROR,
+  NOT_EXECUTABLE_ERROR,
+  Bash,
+)
 
 
 @pytest.fixture(name='bash_runner')
@@ -57,6 +61,20 @@ def test_run(run: MagicMock, check: MagicMock, bash_runner: Bash):
 
 @patch('cc_codechecker.runners.bash.Bash._check_position')
 @patch('cc_codechecker.runners.bash.subprocess.run')
+def test_missing_program(
+  run: MagicMock,
+  check: MagicMock,
+  bash_runner: Bash,
+):
+  """Test the return value of run method."""
+  run.return_value = MagicMock(stdout='', returncode=MISSING_FILE_ERROR)
+  check.return_value = '/usr/bin/bash'
+  ver = bash_runner.run()
+  assert ver[0] == MISSING_FILE_ERROR
+  assert ver[1] == './bash/program.sh is missing'
+
+@patch('cc_codechecker.runners.bash.Bash._check_position')
+@patch('cc_codechecker.runners.bash.subprocess.run')
 def test_not_executable_program(
   run: MagicMock,
   check: MagicMock,
@@ -66,5 +84,5 @@ def test_not_executable_program(
   run.return_value = MagicMock(stdout='', returncode=NOT_EXECUTABLE_ERROR)
   check.return_value = '/usr/bin/bash'
   ver = bash_runner.run()
-  assert ver[0] == 126
+  assert ver[0] == NOT_EXECUTABLE_ERROR
   assert ver[1] == './bash/program.sh is not executable'
