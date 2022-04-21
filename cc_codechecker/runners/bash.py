@@ -13,6 +13,7 @@ import subprocess
 from cc_codechecker.runner import Runner
 
 NOT_EXECUTABLE_ERROR = 126
+MISSING_FILE_ERROR = 127
 
 
 class Bash(Runner):
@@ -95,8 +96,12 @@ class Bash(Runner):
     if run_verbose:
       print(f'Bash run {bash_run}')
 
+    # TODO: Convert this if-chain into a map[err, str].
     if bash_run.returncode is NOT_EXECUTABLE_ERROR and not bash_run.stdout:
       bash_run.stdout = f'{program_file_name} is not executable'
+
+    if bash_run.returncode is MISSING_FILE_ERROR and not bash_run.stdout:
+      bash_run.stdout = f'{program_file_name} is missing'
 
     return (bash_run.returncode, bash_run.stdout)
 
