@@ -94,15 +94,8 @@ def init(options: Namespace) -> int: # pragma: no cover
   return os.EX_OK
 
 def _read_conf_from_file() -> dict:
-  try:
-    with open(FILE_NAME, encoding='locale') as file:
-      return yaml.full_load(file)
-  except OSError as os_error:
-    print(f'Problem opening the configuration file: {os_error}')
-    raise ValueError('Fail to retrieve configuration file') from os_error
-  except Exception as ex:
-    print(f'Unknown exception while reading configuration due to {ex}')
-    raise Exception from ex
+  with open(FILE_NAME, encoding='locale') as file:
+    return yaml.full_load(file)
 
 def run(options: Namespace) -> int: # pragma: no cover
   """Run the coding challenge.
@@ -232,6 +225,18 @@ def main(): # pragma: no cover
       sys.exit(os.EX_OK)
 
     sys.exit(parser.func(parser))
+  except OSError as os_error:
+    if os_error.errno == 2 and os_error.filename == FILE_NAME:
+      print('The main configuration file is missing.')
+      print('Create it by running codechecker using the init subcommand \
+        (`cc-codechecker init`).')
+      print('Use codechecker with --help (`cc-codechecker --help`) for more \
+        generic help or init --help (`cc-codechecker init --help`) for more \
+          specific help.')
+    else:
+      print(f'Problem opening the configuration file: {os_error}')
+
+    sys.exit(os.EX_CONFIG)
   except AttributeError as aex:
     if parser.verbose:
       if not hasattr(parser, 'func'):
