@@ -2,6 +2,10 @@
 
 <!--next-version-placeholder-->
 
+## v0.1.13 (2022-04-21)
+### Fix
+* Insert endline at the end of the score line ([`2b959a0`](https://github.com/Daniele-Tentoni/cc-codechecker/commit/2b959a00c954c9774c199930820fb7ce2e594550))
+
 ## v0.1.12 (2022-03-02)
 ### Fix
 * Report not executable bash program error ([`d3e7350`](https://github.com/Daniele-Tentoni/cc-codechecker/commit/d3e7350ae95f92ba51d59a7cf2c5ed20b80480c6))
