@@ -68,7 +68,7 @@ def init(options: Namespace) -> int: # pragma: no cover
   if context.options().verbose:
     print('Initializing a new challenge')
 
-  hidden = os.path.isfile('.codechecker.yml')
+  hidden = os.path.isfile(FILE_NAME)
   overwrite = context.options().overwrite_yml
   if not overwrite and hidden:
     print('You already have a codechecker project installed')
