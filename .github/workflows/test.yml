@@ -13,6 +13,10 @@ on:
       - main
   workflow_call:
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   test:
     name: Run tests on ${{ matrix.os }}
