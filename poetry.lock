@@ -624,11 +624,11 @@ requests = ">=2.0.1,<3.0.0"
 
 [[package]]
 name = "reuse"
-version = "1.1.2"
+version = "2.1.0"
 description = "reuse is a tool for compliance with the REUSE recommendations."
 category = "dev"
 optional = false
-python-versions = ">=3.6.2,<4.0.0"
+python-versions = ">=3.8,<4.0"
 
 [package.dependencies]
 binaryornot = ">=0.4.4,<0.5.0"
@@ -636,7 +636,6 @@ binaryornot = ">=0.4.4,<0.5.0"
 Jinja2 = ">=3.0.0,<4.0.0"
 license-expression = ">=1.0"
 python-debian = ">=0.1.38,<0.1.45 || >0.1.45,<0.1.46 || >0.1.46,<0.1.47 || >0.1.47,<0.2.0"
-setuptools = "*"
 
 [[package]]
 name = "rich"
@@ -800,7 +799,7 @@ python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10.0"
-content-hash = "45716965e6b3dd07e52307757fda3f1e21f8a49ccc58764501cfa9d485ca9293"
+content-hash = "b31f8040ccf986f99bf40fe1dca0b51d4d6aa0b556130c25c4a65a4d93775d76"
 
 [metadata.files]
 astroid = [
@@ -1234,8 +1233,8 @@ requests-toolbelt = [
     {file = "requests_toolbelt-0.9.1-py2.py3-none-any.whl", hash = "sha256:380606e1d10dc85c3bd47bf5a6095f815ec007be7a8b69c878507068df059e6f"},
 ]
 reuse = [
-    {file = "reuse-1.1.2-cp311-cp311-manylinux_2_36_x86_64.whl", hash = "sha256:d3cf6981e9b2855845a0cf323526fd1cde94a640ea1d8dce22d4156788b282bc"},
-    {file = "reuse-1.1.2.tar.gz", hash = "sha256:80eb6e5ab5f73c784b5a9153e61a282045f6f9292124e1b55d4a7265dbad4246"},
+    {file = "reuse-2.1.0-cp310-cp310-manylinux_2_35_x86_64.whl", hash = "sha256:b214e756582766c9a8c84e195707a4ee86f58640bc2b0c5eac85279f5fd7d9de"},
+    {file = "reuse-2.1.0.tar.gz", hash = "sha256:4211e91caa4c9e433802618a89a2d49a67e2bf76a8029d6708090892f0cdebec"},
 ]
 rich = [
     {file = "rich-13.2.0-py3-none-any.whl", hash = "sha256:7c963f0d03819221e9ac561e1bc866e3f95a02248c1234daa48954e6d381c003"},
