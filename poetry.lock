@@ -567,7 +567,7 @@ yaml = ["PyYaml (>=5.2)"]
 
 [[package]]
 name = "python-semantic-release"
-version = "8.2.0"
+version = "8.3.0"
 description = "Automatic Semantic Versioning for Python projects"
 category = "main"
 optional = false
@@ -1210,8 +1210,8 @@ python-gitlab = [
     {file = "python_gitlab-2.10.1-py3-none-any.whl", hash = "sha256:581a219759515513ea9399e936ed7137437cfb681f52d2641626685c492c999d"},
 ]
 python-semantic-release = [
-    {file = "python-semantic-release-8.2.0.tar.gz", hash = "sha256:9d5a6b8f3641db93790a91aee61e3561befd083594c8295152062540ca1e57fd"},
-    {file = "python_semantic_release-8.2.0-py3-none-any.whl", hash = "sha256:02f06e4d9ecb926cb176c2fcdb708ac650fed357a598378d8d256a79dc0da04f"},
+    {file = "python-semantic-release-8.3.0.tar.gz", hash = "sha256:62325bf32738ea1223ad4efaba0809bac4355ea2d4ad214f676232613a6625f4"},
+    {file = "python_semantic_release-8.3.0-py3-none-any.whl", hash = "sha256:7a26551af9f56485571b7e7831c342a327b16931560d58bc5de99b1cf1dc7ef5"},
 ]
 pyyaml = [
     {file = "PyYAML-6.0.1-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:d858aa552c999bc8a8d57426ed01e40bef403cd8ccdd0fc5f6f04a00414cac2a"},
