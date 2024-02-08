@@ -568,11 +568,11 @@ yaml = ["PyYaml (>=5.2)"]
 
 [[package]]
 name = "python-semantic-release"
-version = "8.7.0"
+version = "9.0.3"
 description = "Automatic Semantic Versioning for Python projects"
 category = "main"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 
 [package.dependencies]
 click = ">=8,<9"
@@ -588,10 +588,10 @@ shellingham = ">=1.5.0.post1"
 tomlkit = ">=0.10,<1.0"
 
 [package.extras]
-dev = ["pre-commit", "ruff (==0.1.8)", "tox"]
+dev = ["pre-commit", "ruff (==0.1.11)", "tox"]
 docs = ["Sphinx (<=6.0.0)", "furo (>=2023.3.27)", "sphinx-autobuild (==2021.03.14)", "sphinxcontrib-apidoc (==0.3.0)"]
 mypy = ["mypy", "types-requests"]
-test = ["coverage[toml] (>=6,<8)", "pytest (>=7,<8)", "pytest-clarity (>=1.0.1)", "pytest-cov (>=4,<5)", "pytest-lazy-fixture (>=0.6.3,<0.7.0)", "pytest-mock (>=3,<4)", "pytest-pretty (>=1.2.0,<2)", "pytest-xdist (>=2,<4)", "requests-mock (>=1.10.0,<2)", "responses (==0.23.3)", "types-pytest-lazy-fixture (>=0.6.3.3)"]
+test = ["coverage[toml] (>=6,<8)", "pytest (>=7,<8)", "pytest-clarity (>=1.0.1)", "pytest-cov (>=4,<5)", "pytest-env (>=1.0,<2.0)", "pytest-lazy-fixture (>=0.6.3,<0.7.0)", "pytest-mock (>=3,<4)", "pytest-pretty (>=1.2.0,<2)", "pytest-xdist (>=2,<4)", "requests-mock (>=1.10.0,<2)", "responses (==0.23.3)", "types-pytest-lazy-fixture (>=0.6.3.3)"]
 
 [[package]]
 name = "pyyaml"
@@ -799,7 +799,7 @@ testing = ["coverage (>=4)", "coverage-enable-subprocess (>=1)", "flaky (>=3)", 
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10.0"
-content-hash = "ab107503c3794132f8015a6ac292133ecf356ad98d947e94cf35930dd0c6ce3f"
+content-hash = "71fe343adb6843f8f10dd6ea126a5ec42e8ecb79aa455e2bdd7a2b463a673b72"
 
 [metadata.files]
 annotated-types = [
@@ -1211,8 +1211,8 @@ python-gitlab = [
     {file = "python_gitlab-2.10.1-py3-none-any.whl", hash = "sha256:581a219759515513ea9399e936ed7137437cfb681f52d2641626685c492c999d"},
 ]
 python-semantic-release = [
-    {file = "python-semantic-release-8.7.0.tar.gz", hash = "sha256:6bbd11b1e8ac70e0946ed6d257094c851b2507edfbc393eef6093d0ed1dbe0b4"},
-    {file = "python_semantic_release-8.7.0-py3-none-any.whl", hash = "sha256:a016b1cf43a5f3667ce2cfddd8e30b6210a2d52b0e2f6b487aae1164f2540eaa"},
+    {file = "python-semantic-release-9.0.3.tar.gz", hash = "sha256:c11ce2d805347ba29175a2c35072afa013cd2bf502e57193ac1ed79e14c057cc"},
+    {file = "python_semantic_release-9.0.3-py3-none-any.whl", hash = "sha256:13385d60546eaac80b3bfea18503d551936a3c5bd73f960d59d94d021a9e274c"},
 ]
 pyyaml = [
     {file = "PyYAML-6.0.1-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:d858aa552c999bc8a8d57426ed01e40bef403cd8ccdd0fc5f6f04a00414cac2a"},
